@@ -54,7 +54,7 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('h1').textContent).toContain('Tour of Heroes');
   });
 
-  it('should render title in a h1 tag', () => {
+  it('should render 2 button-links', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
