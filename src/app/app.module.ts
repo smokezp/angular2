@@ -3,12 +3,12 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule}   from '@angular/forms';
 import {HttpModule}    from '@angular/http';
 
-import {AppComponent}  from './app.component';
-import {HeroDetailComponent} from './hero-detail.component';
-import {HeroesComponent}     from './heroes.component';
-import {HeroService}         from './hero.service';
-import {DashboardComponent}         from './dashboard.component';
-import {HeroSearchComponent}         from './hero-search.component';
+import {AppComponent}  from './appComponent/app.component';
+import {HeroDetailComponent} from './heroDetailComponent/hero-detail.component';
+import {HeroesComponent}     from './heroesComponent/heroes.component';
+import {HeroService}         from './hero/hero.service';
+import {DashboardComponent}         from './dashboardComponent/dashboard.component';
+import {HeroSearchComponent}         from './heroSeachComponent/hero-search.component';
 
 import {AppRoutingModule}     from './app-routing.module';
 

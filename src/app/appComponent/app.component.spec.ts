@@ -2,11 +2,11 @@ import {TestBed, ComponentFixture} from '@angular/core/testing';
 import {AppComponent} from './app.component';
 import {By}              from '@angular/platform-browser';
 import {DebugElement}    from '@angular/core';
-import {AppRoutingModule}     from './app-routing.module';
-import {DashboardComponent}   from './dashboard.component';
-import {HeroDetailComponent}  from './hero-detail.component';
-import {HeroesComponent}      from './heroes.component';
-import {HeroSearchComponent}         from './hero-search.component';
+import {AppRoutingModule}     from '../app-routing.module';
+import {DashboardComponent}   from '../dashboardComponent/dashboard.component';
+import {HeroDetailComponent}  from '../heroDetailComponent/hero-detail.component';
+import {HeroesComponent}      from '../heroesComponent/heroes.component';
+import {HeroSearchComponent}         from '../heroSeachComponent/hero-search.component';
 import {FormsModule} from '@angular/forms';
 import {APP_BASE_HREF} from '@angular/common';
 
