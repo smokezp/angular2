@@ -1,5 +1,4 @@
 import {TestBed, ComponentFixture} from '@angular/core/testing';
-import {DebugElement}    from '@angular/core';
 import {AppRoutingModule}     from '../app-routing.module';
 import {DashboardComponent}   from './dashboard.component';
 import {HeroDetailComponent}  from '../heroDetailComponent/hero-detail.component';
@@ -11,7 +10,6 @@ import {FormsModule} from '@angular/forms';
 import {APP_BASE_HREF} from '@angular/common';
 
 let fixture: ComponentFixture<DashboardComponent>;
-let comp: DashboardComponent;
 
 describe('DashboardComponent', () => {
   beforeEach(() => {
