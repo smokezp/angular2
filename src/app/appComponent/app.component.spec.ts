@@ -8,8 +8,7 @@ import {HeroSearchComponent}         from '../heroSeachComponent/hero-search.com
 import {FormsModule} from '@angular/forms';
 import {APP_BASE_HREF} from '@angular/common';
 
-let fixture: ComponentFixture<AppComponent>;
-let comp: AppComponent;
+let fixture: ComponentFixture<AppComponent>, app, comp;
 
 describe('AppComponent', () => {
   beforeEach(() => {
@@ -26,30 +25,27 @@ describe('AppComponent', () => {
     });
 
     fixture = TestBed.createComponent(AppComponent);
-    comp = fixture.componentInstance;
+    app = fixture.debugElement.componentInstance;
+    comp = fixture.debugElement.nativeElement;
+    fixture.detectChanges();
   });
 
   it('should create the app', () => {
-    const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   });
 
   it(`should have as title 'app'`, () => {
-    const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual('Tour of Heroes');
   });
 
   it('should render title in a h1 tag', () => {
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Tour of Heroes');
+    expect(comp.querySelector('h1').textContent).toContain('Tour of Heroes');
   });
 
   it('should render 2 button-links', () => {
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    const aSelect = compiled.querySelectorAll('a');
+    const aSelect = comp.querySelectorAll('a');
     expect(aSelect[0].textContent).toContain('Dashboard');
     expect(aSelect[1].textContent).toContain('Heroes');
+    expect(aSelect[2].textContent).toContain('Coverage');
   });
 });
