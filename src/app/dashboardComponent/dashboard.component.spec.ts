@@ -10,6 +10,7 @@ import {FormsModule} from '@angular/forms';
 import {APP_BASE_HREF} from '@angular/common';
 
 let fixture: ComponentFixture<DashboardComponent>;
+let component, heroService;
 
 describe('DashboardComponent', () => {
   beforeEach(() => {
@@ -25,9 +26,23 @@ describe('DashboardComponent', () => {
     });
 
     fixture = TestBed.createComponent(DashboardComponent);
+    component = fixture.componentInstance;
+    heroService = TestBed.get(HeroService);
   });
 
   it('should create the app', () => {
-    expect(true).toBe(true);
+    let sting = 'string';
+    spyOn(heroService, 'getHeroes').and.returnValue(Promise.resolve(sting));
+
+    component.ngOnInit();
+    expect(heroService.getHeroes).toHaveBeenCalled();
+    expect(heroService.getHeroes).toHaveBeenCalledTimes(1);
+    // fixture.detectChanges();
+    console.log(component.heroes);
+    // console.log(fixture);
+    // expect(component.heroes).toBe(sting);
+// console.log(spy);
+    // expect(el.nativeElement.textContent.trim()).toBe('Logout');
+    // expect(true).toBe(true);
   });
 });
