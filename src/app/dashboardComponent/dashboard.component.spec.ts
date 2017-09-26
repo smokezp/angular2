@@ -37,12 +37,9 @@ describe('DashboardComponent', () => {
     component.ngOnInit();
     expect(heroService.getHeroes).toHaveBeenCalled();
     expect(heroService.getHeroes).toHaveBeenCalledTimes(1);
-    // fixture.detectChanges();
-    console.log(component.heroes);
-    // console.log(fixture);
-    // expect(component.heroes).toBe(sting);
-// console.log(spy);
-    // expect(el.nativeElement.textContent.trim()).toBe('Logout');
-    // expect(true).toBe(true);
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      expect(component.heroes).toEqual('trin');
+    });
   });
 });
