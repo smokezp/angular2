@@ -30,7 +30,7 @@ describe('DashboardComponent', () => {
     heroService = TestBed.get(HeroService);
   });
 
-  it('should create the app', () => {
+  it('should create the app', (done) => {
     let sting = 'string';
     spyOn(heroService, 'getHeroes').and.returnValue(Promise.resolve(sting));
 
@@ -40,6 +40,7 @@ describe('DashboardComponent', () => {
     fixture.detectChanges();
     fixture.whenStable().then(() => {
       expect(component.heroes).toEqual('trin');
+      done();
     });
   });
 });
