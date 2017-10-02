@@ -1,40 +1,56 @@
-import {TestBed} from '@angular/core/testing';
-import {AppRoutingModule}     from '../app-routing.module';
-import {HeroesComponent}      from '../heroesComponent/heroes.component';
-import {HeroSearchComponent}         from '../heroSeachComponent/hero-search.component';
-import {DashboardComponent}   from '../dashboardComponent/dashboard.component';
-import {HeroDetailComponent}  from '../heroDetailComponent/hero-detail.component';
-import {HeroService}         from './hero.service';
-import {HttpModule}    from '@angular/http';
-import {FormsModule} from '@angular/forms';
-import {APP_BASE_HREF} from '@angular/common';
+import {Injectable, ReflectiveInjector} from '@angular/core';
+import {async, fakeAsync, tick} from '@angular/core/testing';
+import {BaseRequestOptions, ConnectionBackend, Http, RequestOptions} from '@angular/http';
+import {Response, ResponseOptions} from '@angular/http';
+import {MockBackend, MockConnection} from '@angular/http/testing';
+import {HeroService} from './hero.service';
 
-let heroService;
+const HERO_ONE = 'HeroNrOne';
+const HERO_TWO = 'WillBeAlwaysTheSecond';
 
-fdescribe('heroService', () => {
+fdescribe('MockBackend HeroService Example', () => {
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [AppRoutingModule, FormsModule, HttpModule],
-      declarations: [
-        DashboardComponent,
-        HeroDetailComponent,
-        HeroesComponent,
-        HeroSearchComponent
-      ],
-      providers: [HeroService, {provide: APP_BASE_HREF, useValue: '/'}]
-    });
-
-    heroService = TestBed.get(HeroService);
+    this.injector = ReflectiveInjector.resolveAndCreate([
+      {provide: ConnectionBackend, useClass: MockBackend},
+      {provide: RequestOptions, useClass: BaseRequestOptions},
+      Http,
+      HeroService,
+    ]);
+    this.heroService = this.injector.get(HeroService);
+    this.backend = this.injector.get(ConnectionBackend) as MockBackend;
+    this.backend.connections.subscribe((connection: any) => this.lastConnection = connection);
   });
 
-  it('should create the app', () => {
-    // var heroes = heroService.getHeroes();
-    // console.log(heroes);
-    // let sting = 'string';
-    // spyOn(heroService, 'getHeroes').and.returnValue(Promise.resolve(sting));
-    expect(true).toBe(true);
-    // expect(heroService.getHeroes).toHaveBeenCalled();
-    // expect(heroService.getHeroes).toHaveBeenCalledTimes(1);
-
+  it('getHeroes() should query current service url', () => {
+    this.heroService.getHeroes();
+    expect(this.lastConnection).toBeDefined('no http service connection at all?');
+    expect(this.lastConnection.request.url).toMatch(/api\/heroes$/, 'url invalid');
   });
+
+  it('getHeroes() should return some heroes', fakeAsync(() => {
+    let result: String[];
+    this.heroService.getHeroes().then((heroes: String[]) => result = heroes);
+    this.lastConnection.mockRespond(new Response(new ResponseOptions({
+      body: JSON.stringify({data: [HERO_ONE, HERO_TWO]}),
+    })));
+    tick();
+    expect(result.length).toEqual(2, 'should contain given amount of heroes');
+    expect(result[0]).toEqual(HERO_ONE, ' HERO_ONE should be the first hero');
+    expect(result[1]).toEqual(HERO_TWO, ' HERO_TWO should be the second hero');
+  }));
+
+  it('getHeroes() while server is down', fakeAsync(() => {
+    let result: String[];
+    let catchedError: any;
+    this.heroService.getHeroes()
+      .then((heroes: String[]) => result = heroes)
+      .catch((error: any) => catchedError = error);
+    this.lastConnection.mockRespond(new Response(new ResponseOptions({
+      status: 404,
+      statusText: 'URL not Found',
+    })));
+    tick();
+    expect(result).toBeUndefined();
+    expect(catchedError).toBeDefined();
+  }));
 });
