@@ -84,6 +84,6 @@ describe('HeroSearchComponent', () => {
 
   it('gotoDetail()', () => {
     component.gotoDetail(HERO_ONE);
-    expect(router.navigate).toHaveBeenCalledWith(['/detail', 1]);
+    expect(router.navigate).toHaveBeenCalledWith(['/detail', HERO_ONE.id]);
   });
 });
