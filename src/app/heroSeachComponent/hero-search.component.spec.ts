@@ -27,7 +27,7 @@ let router = {
   navigate: jasmine.createSpy('navigate')
 };
 
-fdescribe('HeroSearchComponent', () => {
+describe('HeroSearchComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppRoutingModule, FormsModule, HttpModule],
@@ -46,7 +46,7 @@ fdescribe('HeroSearchComponent', () => {
     // fixture.detectChanges();
   });
 
-  // it('ngOnInit', fakeAsync(() => {
+  // it('ngOnInit()', fakeAsync(() => {
   //   fixture.detectChanges();
   //   component.ngOnInit();
   //   // tick();
