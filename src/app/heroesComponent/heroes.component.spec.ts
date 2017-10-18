@@ -1,3 +1,4 @@
+//TODO: refactor this imports for all project
 import {TestBed, ComponentFixture, tick, fakeAsync} from '@angular/core/testing';
 import {AppRoutingModule}     from '../app-routing.module';
 import {DashboardComponent}   from '../dashboardComponent/dashboard.component';
@@ -28,7 +29,7 @@ let router = {
   navigate: jasmine.createSpy('navigate')
 };
 
-describe('HeroDetailComponent', () => {
+describe('HeroesComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [AppRoutingModule, FormsModule, HttpModule],
