@@ -1,5 +1,4 @@
 import {ReflectiveInjector} from '@angular/core';
-import {fakeAsync} from '@angular/core/testing';
 import {BaseRequestOptions, ConnectionBackend, Http, RequestOptions} from '@angular/http';
 import {Response, ResponseOptions} from '@angular/http';
 import {MockBackend} from '@angular/http/testing';
@@ -28,7 +27,7 @@ describe('MockBackend HeroService Example', () => {
     this.backend.connections.subscribe((connection: any) => this.lastConnection = connection);
   });
 
-  it('search() should return some heroes', fakeAsync(() => {
+  it('search() should return some heroes', () => {
     this.heroService.search('HeroNrOne').subscribe((heroes: String[]) => {
       expect(heroes.length).toBe(2);
       expect(heroes[0]).toEqual('HeroNrOne');
@@ -39,5 +38,5 @@ describe('MockBackend HeroService Example', () => {
       body: JSON.stringify({data: [HERO_ONE.name, HERO_TWO.name]}),
     })));
 
-  }));
+  });
 });
