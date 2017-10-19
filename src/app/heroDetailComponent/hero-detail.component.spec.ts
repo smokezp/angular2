@@ -5,11 +5,9 @@ import {HeroDetailComponent}  from './hero-detail.component';
 import {HeroesComponent}      from '../heroesComponent/heroes.component';
 import {HeroSearchComponent}  from '../heroSeachComponent/hero-search.component';
 import {HeroService}         from '../hero/hero.service';
-// import {HeroSearchService} from './hero-search.service';
-import {HttpModule, Response, ResponseOptions}    from '@angular/http';
+import {HttpModule}    from '@angular/http';
 import {FormsModule} from '@angular/forms';
 import {APP_BASE_HREF} from '@angular/common'
-// import {Router}            from '@angular/router';
 
 let fixture: ComponentFixture<HeroDetailComponent>;
 let component, heroService;
@@ -40,25 +38,23 @@ describe('HeroDetailComponent', () => {
     fixture = TestBed.createComponent(HeroDetailComponent);
     component = fixture.componentInstance;
     heroService = TestBed.get(HeroService);
-    // fixture.detectChanges();
   });
 
-  // it('goBack()', () => {
-  //   component.goBack();
-  //   // component.gotoDetail(HERO_ONE);
-  //   // expect(router.navigate).toHaveBeenCalledWith(['/detail', 1]);
-  //   expect(true).toBe(true);
-  // });
+  it('goBack()', () => {
+    spyOn(component.location, 'back');
+    component.goBack();
+    expect(component.location.back).toHaveBeenCalled();
+    expect(component.location.back).toHaveBeenCalledTimes(1);
+  });
 
   it('getHero()', fakeAsync(() => {
-    let result: any;
+    let result: Object;
     spyOn(heroService, 'getHeroes').and.returnValue(Promise.resolve([HERO_ONE, HERO_TWO]));
     component.getHero(1).then((heroes: String[]) => result = heroes);
     expect(heroService.getHeroes).toHaveBeenCalled();
     expect(heroService.getHeroes).toHaveBeenCalledTimes(1);
     tick();
-    expect(result.name).toEqual(HERO_ONE.name, ' name HERO_ONE');
-    expect(result.id).toEqual(HERO_ONE.id, ' id HERO_ONE');
+    expect(result).toEqual(HERO_ONE, 'should be hero one');
   }));
 
   it('save()', fakeAsync(() => {
@@ -72,9 +68,13 @@ describe('HeroDetailComponent', () => {
     expect(component.goBack).toHaveBeenCalledTimes(1);
   }));
 
-  // it('ngOnInit()', fakeAsync(() => {
-  //   component.ngOnInit();
-  //   expect(true).toBe(true);
-  // }));
+  it('ngOnInit()', fakeAsync(() => {
+    spyOn(heroService, 'getHero').and.returnValue(Promise.resolve(HERO_ONE));
+    component.ngOnInit();
+    expect(heroService.getHero).toHaveBeenCalled();
+    expect(heroService.getHero).toHaveBeenCalledTimes(1);
+    tick();
+    expect(component.hero).toEqual(HERO_ONE, 'should be hero one');
+  }));
 
 });
