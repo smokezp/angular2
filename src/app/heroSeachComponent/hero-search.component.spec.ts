@@ -54,7 +54,6 @@ describe('HeroSearchComponent', () => {
     tick(300);
     expect(heroSearchService.search).toHaveBeenCalled();
     expect(heroSearchService.search).toHaveBeenCalledTimes(1);
-    console.log(component.heroes);
   }));
 
   it('search()', () => {
