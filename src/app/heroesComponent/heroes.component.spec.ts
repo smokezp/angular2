@@ -6,8 +6,7 @@ import {HeroDetailComponent}  from '../heroDetailComponent/hero-detail.component
 import {HeroesComponent}      from './heroes.component';
 import {HeroSearchComponent}  from '../heroSeachComponent/hero-search.component';
 import {HeroService}         from '../hero/hero.service';
-// import {HeroSearchService} from './hero-search.service';
-import {HttpModule, Response, ResponseOptions}    from '@angular/http';
+import {HttpModule}    from '@angular/http';
 import {FormsModule} from '@angular/forms';
 import {APP_BASE_HREF} from '@angular/common'
 import {Router}            from '@angular/router';
@@ -23,6 +22,11 @@ const HERO_ONE = {
 const HERO_TWO = {
   id: 2,
   name: 'WillBeAlwaysTheSecond'
+};
+
+const HERO_THREE = {
+  id: 3,
+  name: 'HeroThree'
 };
 
 let router = {
@@ -45,15 +49,7 @@ describe('HeroesComponent', () => {
     fixture = TestBed.createComponent(HeroesComponent);
     component = fixture.componentInstance;
     heroService = TestBed.get(HeroService);
-    // fixture.detectChanges();
   });
-
-  // it('goBack()', () => {
-  //   component.goBack();
-  //   // component.gotoDetail(HERO_ONE);
-  //   // expect(router.navigate).toHaveBeenCalledWith(['/detail', 1]);
-  //   expect(true).toBe(true);
-  // });
 
   it('getHeroes()', fakeAsync(() => {
     spyOn(heroService, 'getHeroes').and.returnValue(Promise.resolve([HERO_ONE, HERO_TWO]));
@@ -68,7 +64,7 @@ describe('HeroesComponent', () => {
 
   it('onSelect()', () => {
     component.onSelect(HERO_ONE);
-    expect(component.selectedHero).toEqual(HERO_ONE, 'should be hero one');
+    expect(component.selectedHero).toEqual(HERO_ONE, 'selected hero is hero one');
   });
 
   it('gotoDetail()', () => {
@@ -77,28 +73,44 @@ describe('HeroesComponent', () => {
     expect(router.navigate).toHaveBeenCalledWith(['/detail', HERO_ONE.id]);
   });
 
-  // fit('add()', fakeAsync(() => {
-  //   spyOn(heroService, 'getHeroes').and.returnValue(Promise.resolve(HERO_ONE));
-  //   component.add('dddd');
-  //   tick();
-  //   // expect(router.navigate).toHaveBeenCalledWith(['/detail', HERO_ONE.id]);
-  //   expect(true).toBe(true);
-  // }));
+  it('add() with not empty value', fakeAsync(() => {
+    spyOn(heroService, 'create').and.returnValue(Promise.resolve(HERO_THREE));
+    component.heroes = [HERO_ONE, HERO_TWO];
+    expect(component.heroes.length).toEqual(2, 'should be two heroes');
+    component.add(HERO_THREE.name);
+    expect(heroService.create).toHaveBeenCalled();
+    expect(heroService.create).toHaveBeenCalledTimes(1);
+    tick();
+    expect(component.heroes.length).toEqual(3, 'should get three heroes');
+    expect(component.heroes[2]).toEqual(HERO_THREE, 'should be HeroThree');
+    expect(component.selectedHero).toEqual(null, 'selectedHero should be null');
+  }));
 
-  // it('save()', fakeAsync(() => {
-  //   spyOn(heroService, 'update').and.returnValue(Promise.resolve(HERO_TWO));
-  //   spyOn(component, 'goBack');
-  //   component.save();
-  //   expect(heroService.update).toHaveBeenCalled();
-  //   expect(heroService.update).toHaveBeenCalledTimes(1);
-  //   tick();
-  //   expect(component.goBack).toHaveBeenCalled();
-  //   expect(component.goBack).toHaveBeenCalledTimes(1);
-  // }));
+  it('add() with empty value', fakeAsync(() => {
+    spyOn(heroService, 'create');
+    component.add(' ');
+    expect(heroService.create).not.toHaveBeenCalled();
+  }));
 
-  // fit('ngOnInit()', fakeAsync(() => {
-  //   component.ngOnInit();
-  //   expect(true).toBe(true);
-  // }));
+  it('delete()', fakeAsync(() => {
+    spyOn(heroService, 'delete').and.returnValue(Promise.resolve(null));
+    component.heroes = [HERO_ONE, HERO_TWO, HERO_THREE];
+    component.selectedHero = HERO_THREE;
+    expect(component.heroes.length).toEqual(3, 'should be three heroes');
+    expect(component.selectedHero).toEqual(HERO_THREE, 'selected hero is HeroThree');
+    component.delete(HERO_THREE);
+    expect(heroService.delete).toHaveBeenCalled();
+    expect(heroService.delete).toHaveBeenCalledTimes(1);
+    tick();
+    expect(component.heroes.length).toEqual(2, 'should be two heroes');
+    expect(component.selectedHero).toEqual(null, 'selectedHero should be null');
+  }));
+
+  it('ngOnInit()', () => {
+    spyOn(component, 'getHeroes');
+    component.ngOnInit();
+    expect(component.getHeroes).toHaveBeenCalled();
+    expect(component.getHeroes).toHaveBeenCalledTimes(1);
+  });
 
 });
