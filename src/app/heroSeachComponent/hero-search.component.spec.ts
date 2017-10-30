@@ -1,14 +1,14 @@
 import {TestBed, ComponentFixture, tick, fakeAsync} from '@angular/core/testing';
-import {AppRoutingModule}     from '../app-routing.module';
-import {DashboardComponent}   from '../dashboardComponent/dashboard.component';
-import {HeroDetailComponent}  from '../heroDetailComponent/hero-detail.component';
-import {HeroesComponent}      from '../heroesComponent/heroes.component';
-import {HeroSearchComponent}         from './hero-search.component';
+import {AppRoutingModule} from '../app-routing.module';
+import {DashboardComponent} from '../dashboardComponent/dashboard.component';
+import {HeroDetailComponent} from '../heroDetailComponent/hero-detail.component';
+import {HeroesComponent} from '../heroesComponent/heroes.component';
+import {HeroSearchComponent} from './hero-search.component';
 import {HeroSearchService} from './hero-search.service';
-import {HttpModule}    from '@angular/http';
+import {HttpModule} from '@angular/http';
 import {FormsModule} from '@angular/forms';
 import {APP_BASE_HREF} from '@angular/common'
-import {Router}            from '@angular/router';
+import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 
 let fixture: ComponentFixture<HeroSearchComponent>;

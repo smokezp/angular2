@@ -1,15 +1,15 @@
 //TODO: refactor this imports for all project
 import {TestBed, ComponentFixture, tick, fakeAsync} from '@angular/core/testing';
-import {AppRoutingModule}     from '../app-routing.module';
-import {DashboardComponent}   from '../dashboardComponent/dashboard.component';
-import {HeroDetailComponent}  from '../heroDetailComponent/hero-detail.component';
-import {HeroesComponent}      from './heroes.component';
-import {HeroSearchComponent}  from '../heroSeachComponent/hero-search.component';
-import {HeroService}         from '../hero/hero.service';
-import {HttpModule}    from '@angular/http';
+import {AppRoutingModule} from '../app-routing.module';
+import {DashboardComponent} from '../dashboardComponent/dashboard.component';
+import {HeroDetailComponent} from '../heroDetailComponent/hero-detail.component';
+import {HeroesComponent} from './heroes.component';
+import {HeroSearchComponent} from '../heroSeachComponent/hero-search.component';
+import {HeroService} from '../hero/hero.service';
+import {HttpModule} from '@angular/http';
 import {FormsModule} from '@angular/forms';
 import {APP_BASE_HREF} from '@angular/common'
-import {Router}            from '@angular/router';
+import {Router} from '@angular/router';
 
 let fixture: ComponentFixture<HeroesComponent>;
 let component, heroService;

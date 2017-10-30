@@ -1,19 +1,19 @@
-import {NgModule}      from '@angular/core';
+import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {FormsModule}   from '@angular/forms';
-import {HttpModule}    from '@angular/http';
+import {FormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
 
-import {AppComponent}  from './appComponent/app.component';
+import {AppComponent} from './appComponent/app.component';
 import {HeroDetailComponent} from './heroDetailComponent/hero-detail.component';
-import {HeroesComponent}     from './heroesComponent/heroes.component';
-import {HeroService}         from './hero/hero.service';
-import {DashboardComponent}         from './dashboardComponent/dashboard.component';
-import {HeroSearchComponent}         from './heroSeachComponent/hero-search.component';
+import {HeroesComponent} from './heroesComponent/heroes.component';
+import {HeroService} from './hero/hero.service';
+import {DashboardComponent} from './dashboardComponent/dashboard.component';
+import {HeroSearchComponent} from './heroSeachComponent/hero-search.component';
 
-import {AppRoutingModule}     from './app-routing.module';
+import {AppRoutingModule} from './app-routing.module';
 
 import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
-import {InMemoryDataService}  from './in-memory-data.service';
+import {InMemoryDataService} from './in-memory-data.service';
 
 @NgModule({
   imports: [

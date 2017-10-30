@@ -1,11 +1,11 @@
 import {TestBed, ComponentFixture} from '@angular/core/testing';
-import {AppRoutingModule}     from '../app-routing.module';
-import {DashboardComponent}   from './dashboard.component';
-import {HeroDetailComponent}  from '../heroDetailComponent/hero-detail.component';
-import {HeroesComponent}      from '../heroesComponent/heroes.component';
-import {HeroSearchComponent}         from '../heroSeachComponent/hero-search.component';
-import {HeroService}         from '../hero/hero.service';
-import {HttpModule}    from '@angular/http';
+import {AppRoutingModule} from '../app-routing.module';
+import {DashboardComponent} from './dashboard.component';
+import {HeroDetailComponent} from '../heroDetailComponent/hero-detail.component';
+import {HeroesComponent} from '../heroesComponent/heroes.component';
+import {HeroSearchComponent} from '../heroSeachComponent/hero-search.component';
+import {HeroService} from '../hero/hero.service';
+import {HttpModule} from '@angular/http';
 import {FormsModule} from '@angular/forms';
 import {APP_BASE_HREF} from '@angular/common';
 
