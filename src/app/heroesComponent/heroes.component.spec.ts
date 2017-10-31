@@ -1,4 +1,3 @@
-//TODO: refactor this imports for all project
 import {TestBed, ComponentFixture, tick, fakeAsync} from '@angular/core/testing';
 import {AppRoutingModule} from '../app-routing.module';
 import {DashboardComponent} from '../dashboardComponent/dashboard.component';
