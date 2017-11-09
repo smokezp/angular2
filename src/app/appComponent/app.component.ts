@@ -7,6 +7,9 @@ import {Component} from '@angular/core';
     <nav>
       <a routerLink="/dashboard">Dashboard</a>
       <a routerLink="/heroes">Heroes</a>
+      <a routerLink="/users">Users</a>
+      <a routerLink="/login">Login</a>
+      <a routerLink="/register">Register</a>
       <a href="http://localhost:63342/angular2/coverage/index.html">Coverage</a>
     </nav>
     <router-outlet></router-outlet>

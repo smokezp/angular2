@@ -7,8 +7,14 @@ import {AppComponent} from './appComponent/app.component';
 import {HeroDetailComponent} from './heroDetailComponent/hero-detail.component';
 import {HeroesComponent} from './heroesComponent/heroes.component';
 import {HeroService} from './hero/hero.service';
+import {UserService} from './usersComponent/user.service';
+
+
 import {DashboardComponent} from './dashboardComponent/dashboard.component';
 import {HeroSearchComponent} from './heroSeachComponent/hero-search.component';
+import {LoginComponent} from './loginComponent/login.component';
+import {RegisterComponent} from './registerComponent/register.component';
+import {UsersComponent} from './usersComponent/users.component';
 
 import {AppRoutingModule} from './app-routing.module';
 
@@ -28,11 +34,15 @@ import {InMemoryDataService} from './in-memory-data.service';
     HeroDetailComponent,
     HeroesComponent,
     DashboardComponent,
-    HeroSearchComponent
+    HeroSearchComponent,
+    LoginComponent,
+    RegisterComponent,
+    UsersComponent
   ],
   bootstrap: [AppComponent],
   providers: [
-    HeroService
+    HeroService,
+    UserService
   ],
 })
 
