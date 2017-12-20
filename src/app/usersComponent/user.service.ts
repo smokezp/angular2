@@ -19,21 +19,14 @@ export class UserService {
       .catch(() => console.log('err'));
   }
 
-  // getById(id: number) {
-  //   return this.http.get('/api/users/' + id, this.jwt()).map((response: Response) => response.json());
-  // }
   findUser(fuser: any): Promise<User> {
-   return this.getUsers()
-     .then(users => users.find(user => user.email == fuser.email && user.password == fuser.password));
-
-    // this.heroService
-    //   .delete(hero.id)
-    //   .then(() => {
-    //     this.heroes = this.heroes.filter(h => h !== hero);
-    //     if (this.selectedHero === hero) {
-    //       this.selectedHero = null;
-    //     }
-    //   });
+    return this.getUsers()
+      .then(users => users.find(
+        user =>
+          user.username === fuser.username &&
+          user.password === fuser.password
+        )
+      );
   }
 
   create(user: User) {
@@ -41,27 +34,6 @@ export class UserService {
       .toPromise()
       .then(response => response.json())
       .catch(() => console.log('err'));
-
-
-    // return this.http.post('/api/users', user, this.jwt()).map((response: Response) => response.json());
   }
 
-  // update(user: User) {
-  //   return this.http.put('/api/users/' + user.id, user, this.jwt()).map((response: Response) => response.json());
-  // }
-  //
-  // delete(id: number) {
-  //   return this.http.delete('/api/users/' + id, this.jwt()).map((response: Response) => response.json());
-  // }
-
-  // private helper methods
-
-  // private jwt() {debugger
-  //   // create authorization header with jwt token
-  //   let currentUser = JSON.parse(localStorage.getItem('currentUser'));debugger
-  //   if (currentUser && currentUser.token) {debugger
-  //     let headers = new Headers({'Authorization': 'Bearer ' + currentUser.token});
-  //     return new RequestOptions({headers: headers});
-  //   }
-  // }
 }
