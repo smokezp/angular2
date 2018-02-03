@@ -37,6 +37,7 @@ module.exports = function (config) {
       }
     },
     phantomjsLauncher: {
+
       exitOnResourceError: true
     },
     reporters: ['progress', 'kjhtml'],
